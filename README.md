@@ -31,4 +31,4 @@ Support
 - Stack Overflow: https://stackoverflow.com/questions/tagged/google-drive-sdk
 
 If you've found an error in this sample, please file an issue. Patches are
-encouraged; please refer to [CONTRIBUTING][(/CONTRIBUTING.md) for details.
+encouraged; please refer to [CONTRIBUTING](CONTRIBUTING.md) for details.
