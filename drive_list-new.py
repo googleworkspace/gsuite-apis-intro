@@ -13,19 +13,30 @@
 # limitations under the License.
 
 from __future__ import print_function
+import os.path
+import pickle
 
 from googleapiclient import discovery
-from httplib2 import Http
-from oauth2client import file, client, tools
+from google.auth.transport.requests import Request
+from google_auth_oauthlib.flow import InstalledAppFlow
 
+creds = None
 SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly'
-store = file.Storage('storage.json')
-creds = store.get()
-if not creds or creds.invalid:
-    flow = client.flow_from_clientsecrets('client_id.json', SCOPES)
-    creds = tools.run_flow(flow, store)
+TOKENS = 'token.p' # where to store access & refresh tokens
+if os.path.exists(TOKENS):
+    with open(TOKENS, 'rb') as token:
+        creds = pickle.load(token)
+if not (creds and creds.valid):
+    if creds and creds.expired and creds.refresh_token:
+        creds.refresh(Request())
+    else:
+        flow = InstalledAppFlow.from_client_secrets_file(
+                'client_secret.json', SCOPES)
+        creds = flow.run_local_server()
+with open(TOKENS, 'wb') as token:
+    pickle.dump(creds, token)
 
-DRIVE = discovery.build('drive', 'v3', http=creds.authorize(Http()))
+DRIVE = discovery.build('drive', 'v3', credentials=creds)
 files = DRIVE.files().list().execute().get('files', [])
 for f in files:
     print(f['name'], f['mimeType'])
