@@ -14,18 +14,17 @@
 
 from __future__ import print_function
 import os.path
-import pickle
 
-from googleapiclient import discovery
 from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient import discovery
+from google.oauth2 import credentials
 
 creds = None
 SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly'
-TOKENS = 'token.p' # where to store access & refresh tokens
+TOKENS = 'tokens.json'  # where to store access & refresh tokens
 if os.path.exists(TOKENS):
-    with open(TOKENS, 'rb') as token:
-        creds = pickle.load(token)
+    creds = credentials.Credentials.from_authorized_user_file(TOKENS)
 if not (creds and creds.valid):
     if creds and creds.expired and creds.refresh_token:
         creds.refresh(Request())
@@ -33,10 +32,10 @@ if not (creds and creds.valid):
         flow = InstalledAppFlow.from_client_secrets_file(
                 'client_secret.json', SCOPES)
         creds = flow.run_local_server()
-with open(TOKENS, 'wb') as token:
-    pickle.dump(creds, token)
+with open(TOKENS, 'w') as token:
+    token.write(creds.to_json())
 
 DRIVE = discovery.build('drive', 'v3', credentials=creds)
 files = DRIVE.files().list().execute().get('files', [])
-for f in files:
+for f in files: # 4 fields returned: mimeType, kind, id, name
     print(f['name'], f['mimeType'])
