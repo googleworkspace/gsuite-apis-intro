@@ -1,4 +1,4 @@
-# Copyright 2018-2020 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,10 +22,10 @@ SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly'
 store = file.Storage('storage.json')
 creds = store.get()
 if not creds or creds.invalid:
-    flow = client.flow_from_clientsecrets('client_id.json', SCOPES)
+    flow = client.flow_from_clientsecrets('client_secret.json', SCOPES)
     creds = tools.run_flow(flow, store)
 
 DRIVE = discovery.build('drive', 'v3', http=creds.authorize(Http()))
 files = DRIVE.files().list().execute().get('files', [])
-for f in files:
+for f in files:  # 4 fields returned: mimeType, kind, id, name
     print(f['name'], f['mimeType'])
