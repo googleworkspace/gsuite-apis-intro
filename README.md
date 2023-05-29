@@ -15,8 +15,7 @@ This codelab introduces developers to Google Workspace ([formerly G Suite](https
 
 This repo is part of the [codelab](http://g.co/codelabs/gsuite-apis-intro) introducing developers to using Google Workspace ("GWS") RESTful HTTP APIs. The example will be done in Python for brevity and wide availability, but [all common languages are supported](http://developers.google.com/api-client-library). The tutorial shows how to use the developer console to create and manage projects, including obtaining the credentials needed in your apps, then moves on to the primary code sample that displays the first 100 files & folders in your Google Drive by using the Drive API.
 
-> ** `oauth2client` library deprecated**
->
+> `oauth2client` **library deprecated**
 > The [`oauth2client`](https://github.com/googleapis/oauth2client) library was [deprecated](https://google-auth.readthedocs.io/en/latest/oauth2client-deprecation.html) in [2017](https://github.com/googleapis/oauth2client/commit/00926f2058e23da7f6772ad6477e64d7506415e5) in favor of newer replacements. However the newer libraries [do not yet support](https://google-auth.readthedocs.io/en/latest/oauth2client-deprecation.html#replacement) either user authorization nor user credentials storage, two features that are required in this codelab. When those features become available, we will migrate to the newer libraries. For now, `oauth2client` still works, even in maintenance mode, and provides automated, threadsafe, and 2.x/3.x-compatible storage of and access to OAuth2 tokens for users whereas the newer libraries do not (yet).
 
 
