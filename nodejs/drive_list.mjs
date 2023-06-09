@@ -5,11 +5,11 @@ COPYRIGHT:    (c)2023 CyberWeb Consulting LLC
 LICENSE:      apache.org/licenses/LICENSE-2.0
 */
 
-const fs = require('fs').promises;
-const path = require('path');
-const process = require('process');
-const {authenticate} = require('@google-cloud/local-auth');
-const {google} = require('googleapis');
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import process from 'node:process';
+import {authenticate} from '@google-cloud/local-auth';
+import {google} from 'googleapis';
 
 const CREDENTIALS_PATH = path.join(process.cwd(), 'client_secret.json');
 const TOKEN_PATH = path.join(process.cwd(), 'storage.json');
