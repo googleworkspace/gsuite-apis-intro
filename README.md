@@ -29,10 +29,10 @@ Use of the Google Drive API (and most GWS APIs) are covered by a [monthly subscr
 
 Filename | Description
 --- | ---
-[`python/drive_list.py`](/python/drive_list.py) | The original sample app as featured in codelab
-[`python/drive_list-new.py`](/python/drive_list-new.py) | Same as `drive_list.py` but uses newer auth libraries (not threadsafe nor easily Python 2-3 compatible nor handles auth tokens [see extra JSON storage code])
+[`python/drive_list.py`](/python/drive_list.py) | The original sample app as featured in codelab (uses older, deprecated auth libraries but matches much of the code that's still online)
+[`python/drive_list-new.py`](/python/drive_list-new.py) | Same as `drive_list.py` but uses newer (current) auth libraries (must manage auth tokens [see extra JSON storage code])
 [`nodejs/drive_list.js`](/nodejs/drive_list.js) | The Node.js/JavaScript version of the script (also have to manage auth token storage)
-[`nodejs/drive_list.mjs`](/nodemjs/drive_list.mjs) | Same as `drive_list.js` but with ES module `import`s instead of `require`s.
+[`nodejs/drive_list.mjs`](/nodejs/drive_list.mjs) | Same as `drive_list.js` but with ES module `import`s instead of `require`s.
 
 
 ## Resources

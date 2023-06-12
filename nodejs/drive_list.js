@@ -61,7 +61,7 @@ async function saveCredentials(client) {
  * @return {JSONClient} client credentials
  */
 async function authorize() {
-  let client = await loadSavedCredentialsIfExist();
+  var client = await loadSavedCredentialsIfExist();
   if (client) return client;
   client = await authenticate({
     scopes: SCOPES,
@@ -80,9 +80,9 @@ async function authorize() {
 async function listFiles(authClient) {
   const drive = google.drive({version: 'v3', auth: authClient});
   const res = await drive.files.list();
-  const files = res.data.files;
-  if (files.length !== 0) {
-    files.map((file) => console.log(`${file.name} (${file.mimeType})`));
+  const files = res.data.files || [];
+  for (let file of files) {
+    console.log(`${file.name} (${file.mimeType})`);
   }
 }
 
